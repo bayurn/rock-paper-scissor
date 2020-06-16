@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Indek from './components/indek';
 import * as serviceWorker from './serviceWorker';
+import Home from './components/home';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Indek />
+    <Home />
   </React.StrictMode>,
   document.getElementById('root')
 );

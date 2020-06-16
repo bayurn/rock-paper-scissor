@@ -2,7 +2,7 @@ import React from 'react'
 import rock from '../assets/rock.png'
 import paper from '../assets/paper.png'
 import scissor from '../assets/scissor.png'
-import '../indek.css'
+import '../home.css'
 
 function Player({weapon}) {
     return (

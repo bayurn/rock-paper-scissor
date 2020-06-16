@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import Player from './player'
-import '../indek.css'
+import '../home.css'
 
 const weapons = ["rock", "paper", "scissor"];
 
-class Indek extends Component {
+class Home extends Component {
 
     state = {
         playerOne: weapons[0],
         playerTwo: weapons[0],
-        winner: ""
+        winner: "",
+        playerOneCounter: 0,
+        playerTwoCounter: 0
     }
 
     startGame = () => {
@@ -27,11 +29,10 @@ class Indek extends Component {
                 })
             }
         }, 100)
-
     }
 
     selectWinner = () => {
-        const { playerOne, playerTwo } = this.state;
+        const { playerOne, playerTwo, playerOneCounter, playerTwoCounter } = this.state;
 
         if (playerOne === playerTwo) {
             return "Tie Dude";
@@ -39,9 +40,14 @@ class Indek extends Component {
             (playerOne === "rock" && playerTwo === "scissor") ||
             (playerOne === "scissor" && playerTwo === "paper") ||
             (playerOne === "paper" && playerTwo === "rock")) {
-            return "Player one Wins";
+
+            return this.setState({
+                playerOneCounter: playerOneCounter + 1
+            })
         } else {
-            return "Player two Wins";
+            return this.setState({
+                playerTwoCounter: playerTwoCounter + 1
+            })
         }
     }
 
@@ -52,21 +58,30 @@ class Indek extends Component {
         })
     }
 
+
+
     render() {
 
-        const { playerOne, playerTwo, winner } = this.state;
+        const { playerOne, playerTwo, winner, playerOneCounter, playerTwoCounter } = this.state;
 
         return (
             <>
                 <h1>Rock Paper Scisscor</h1>
-                <div>
+                <div className="score-board">
+                    <div id="p1" className="badge">PLAYER ONE</div>
+                    <div id="p2" className="badge">PLAYER TWO</div>
+                    <span id="p1-score">{playerOneCounter}</span>
+                    <span>:</span>
+                    <span id="p2-score">{playerTwoCounter}</span>
+                </div>
+                <div className="WeaponPlayer">
                     <Player weapon={playerOne} />
                     <Player weapon={playerTwo} />
                 </div>
                 <div>
                     <button className="WeaponBtn" onClick={() => this.selectWeapon('rock')}>rock</button>
-                    <button className="WeaponBtn" onClick={() => this.selectWeapon('paper')}>paper</button>{" "}
-                    <button className="WeaponBtn" onClick={() => this.selectWeapon('scissor')}>scissor  </button>
+                    <button className="WeaponBtn" onClick={() => this.selectWeapon('paper')}>paper</button>
+                    <button className="WeaponBtn" onClick={() => this.selectWeapon('scissor')}>scissor</button>
                 </div>
                 <div className="Winner">{winner ? this.selectWinner() : null}</div>
                 <button type="button" onClick={this.startGame}>Start</button>
@@ -75,4 +90,4 @@ class Indek extends Component {
     }
 }
 
-export default Indek;
+export default Home;
